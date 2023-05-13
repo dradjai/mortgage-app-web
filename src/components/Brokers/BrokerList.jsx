@@ -23,7 +23,7 @@ export default function BrokerList() {
         {(!brokers)
         ? <h2>Loading...</h2>
         : brokers.map(broker => (
-          <BrokerCard key={broker.id} broker={broker}/>
+          <BrokerCard key={broker.id} broker={broker}/>  
         ))}
 
       </section>
