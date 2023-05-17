@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import RequestCard from "./RequestsCard";
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
+import ModalComponent from "../Modal/ModalComponent";
+import { UserStatus } from "../../App";
+
+
 
 const reqObj = {
+  userId: "",
   firstName: "",
   lastName: "",
   email: "",
@@ -13,16 +15,15 @@ const reqObj = {
 }
 
 
-
 export default function RequestList() {
+
+  const { user } = useContext(UserStatus);
   const [show, setShow] = useState(false);
   const [requests, setRequests] = useState();
+  const [isUpdate, setIsUpdate] = useState(false);
   const [formValues, setFormValues] = useState({reqObj});
-  const [update, setUpdate] = useState('');
 
-  
-  
-
+ 
   const handleClose = () => {
     setShow(false)
     setFormValues(reqObj)
@@ -30,20 +31,25 @@ export default function RequestList() {
   const handleShow = () => setShow(true);
 
 
+
+
+// Listening changes to requests to render
 useEffect( () => {
-  fetch("https://mortgage-app-dsr.web.app/requests")
+  fetch(`https://mortgage-app-dsr.web.app/requests/${user._id}`)
     .then(resp => resp.json())
     .then(setRequests)
     .catch(alert)
-}, [requests])
+}, [user])
 
 
-
-
+// ADD Request
 const handleAdd = async (e) => {
+
+  formValues.userId = user._id;
  
   e.preventDefault();
-  const response = await fetch("https://mortgage-app-dsr.web.app/requests", {
+  setIsUpdate(false);
+  const response = await fetch(`https://mortgage-app-dsr.web.app/requests/${user._id}`, {
     
     method: "POST",
     headers: { "Content-Type": "application/json"},
@@ -51,98 +57,77 @@ const handleAdd = async (e) => {
   })
   
   const data = await response.json();
-  handleClose(true);
+  setRequests(data);
   setFormValues(reqObj);
+  handleClose(true);
  
 }
 
+// Edit a request - Not functioning
+const handleUpdate = async (e, item) => {
+  e.preventDefault();
+  
+  const newReq = {
+  
+    firstName: item.firstName,
+    lastName: item.lastName,
+    email: item.email,
+    phone: item.phone,
+    location: item.location
+  }
+  const response = await fetch(`https://mortgage-app-dsr.web.app/requests/${user._id}/${item._id}`, {
 
+    method: "PATCH",
+    headers: { 
+     "Content-Type": "application/json"
+    },
+    body: JSON.stringify(newReq)
+  })
+  const data = await response.json();
+  setRequests(data);
+  setFormValues(reqObj);
+  setIsUpdate(false);
+  handleClose(true);
+  
+ 
+}
+
+const handleDelete = async (item) => {
+  const response = await fetch(`https://mortgage-app-dsr.web.app/requests/${user._id}/${item._id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json"
+    },
+  })
+  const data = await response.json()
+  setRequests(data);
+
+}
 
 
 
   return(
     <>
       
-      <div>Add New</div>
-      <Button variant="primary" onClick={handleShow}>
-        Add New Request
-      </Button>
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Request</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        <Form onSubmit={handleAdd}>
-      <Form.Group className="mb-3" controlId="formBasicFirstName">
-        <Form.Label>First Name</Form.Label>
-        <Form.Control 
-          type="text" 
-          placeholder="Enter First Name" 
-          value={formValues.firstName}
-          onChange={(e) => {setFormValues({...formValues, firstName: e.target.value})}}/>
-
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicLastName">
-        <Form.Label>Last Name</Form.Label>
-        <Form.Control 
-          type="text" 
-          placeholder="Enter Last Name" 
-          value={formValues.lastName}
-          onChange={ (e) => {setFormValues({...formValues, lastName: e.target.value})}}/>
-
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email</Form.Label>
-        <Form.Control 
-          type="text" 
-          placeholder="Enter email" 
-          value={formValues.email}
-          onChange={ (e) => {setFormValues({...formValues, email: e.target.value})}}/>
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicLastPhone">
-        <Form.Label>Phone Number</Form.Label>
-        <Form.Control 
-          type="text" 
-          placeholder="Enter phone" 
-          value={formValues.phone}
-          onChange={ (e) => {setFormValues({...formValues, phone: e.target.value})}}
-          />
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicLastPhone">
-        <Form.Label>City Location</Form.Label>
-        <Form.Control 
-          type="text" 
-          placeholder="Enter location" 
-          value={formValues.location}
-          onChange={ (e) => {setFormValues({...formValues, location: e.target.value})}}
-          />
-      </Form.Group>
-     
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
-
-
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          
-        </Modal.Footer>
-      </Modal>
-      
       {!requests
       ? <h2>Loading...</h2>
       : requests.map(request => (
-        <RequestCard key={request.id} req={request} setShow={setShow} setFormValues={setFormValues} setUpdate={setUpdate}/>
+        <RequestCard key={request.id} req={request} 
+          setIsUpdate={setIsUpdate} 
+          setFormValues={setFormValues} 
+          handleShow={handleShow} 
+          handleDelete={handleDelete}/>
+        
       ))}
+      <ModalComponent 
+        formValues={formValues} 
+        setFormValues={setFormValues} 
+        handleClose={handleClose} 
+        handleShow={handleShow} 
+        show={show} 
+        isUpdate={isUpdate} 
+        handleUpdate={handleUpdate}
+        handleAdd={handleAdd}/>
     </>
   )
 }
