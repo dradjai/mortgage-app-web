@@ -11,7 +11,14 @@ const reqObj = {
   lastName: "",
   email: "",
   phone: "",
-  location: ""
+  location: "",
+  propType: "",
+  propValue: "",
+  downPayment: "",
+  credit: "",
+  employment: "",
+  scenario: ""
+
 }
 
 
@@ -28,9 +35,11 @@ export default function RequestList() {
     setShow(false)
     setFormValues(reqObj)
   }
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    setShow(true);
+    setIsUpdate(false);
 
-
+  }
 
 
 // Listening changes to requests to render
@@ -73,7 +82,14 @@ const handleUpdate = async (e, item) => {
     lastName: item.lastName,
     email: item.email,
     phone: item.phone,
-    location: item.location
+    location: item.location,
+    propType: item.propType,
+    propValue: item.propValue,
+    downPayment: item.propValue,
+    credit: item.credit,
+    employment: item.employment,
+    scenario: item.scenario
+    
   }
   const response = await fetch(`https://mortgage-app-dsr.web.app/requests/${user._id}/${item._id}`, {
 

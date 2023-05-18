@@ -1,15 +1,19 @@
 
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 
 
 export default function RegisterForm() {
 
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleRegister = async (e) => {
+    e.preventDefault();
     const resp = await fetch('https://mortgage-app-dsr.web.app/register', {
       method: "POST",
       headers: {
@@ -18,6 +22,12 @@ export default function RegisterForm() {
       body: JSON.stringify({email, password})
     });
     const _user = await resp.json();
+    console.log(_user)
+    if(_user.message === 'Registered'){
+      navigate('/login')
+    }
+   
+
     
 
     }
