@@ -84,6 +84,7 @@ export default function ModalComponent({ formValues, setFormValues, handleClose,
       <Form.Group as={Col} className="mb-3" controlId="formGridPropType">
         <Form.Label>PropertyType</Form.Label>
         <Form.Select onChange={ (e) => {setFormValues({...formValues, propType: e.target.value})}} >
+          <option>Select Property Type</option>
           <option value="Single-Family">Single-Family</option>
           <option value="TownHome">Townhome</option>
           <option value="Condo">Condo</option>
@@ -116,7 +117,7 @@ export default function ModalComponent({ formValues, setFormValues, handleClose,
         <Form.Group as={Col} className="mb-3" controlId="formGridCredit">
         <Form.Label>Credit</Form.Label>
         <Form.Select onChange={ (e) => {setFormValues({...formValues, credit: e.target.value})}}>
-      
+          <option>Select Credit</option>
           <option value="> 740">&gt; 740</option>
           <option value="700-739">700 - 739</option>
           <option value="660-699">660 - 699</option>

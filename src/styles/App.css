@@ -1,0 +1,23 @@
+
+body {
+  background-image: url("/public/images/HomePgBg.jpeg");
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  
+}
+
+.home-card {
+  opacity: .75;
+  font-weight: 700;
+  font-size: xx-large;
+  border-radius: 2%;
+  box-shadow: 5px 5px;
+}
+
+
+
+
+
+
+

@@ -5,11 +5,13 @@ import Calculator from './pages/Calculator';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Home from './pages/Home';
-import Footer from './components/Footer/Footer';
+import Footer from './components/Footer/FooterComponent';
 import Requests from './pages/Requests';
 import Brokers from './pages/Brokers';
 import './styles/App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
+import FooterComponent from './components/Footer/FooterComponent';
+import { Container } from 'react-bootstrap';
 
 export const UserStatus = createContext(null);
 
@@ -20,7 +22,7 @@ const [user, setUser] = useState('');
 
 
   return (
-  
+  <>
     <main>
       <UserStatus.Provider value={{user, setUser}}>
       <BrowserRouter>
@@ -38,13 +40,19 @@ const [user, setUser] = useState('');
 
         </Routes>
        
-        <Footer/>
-        
       </BrowserRouter>
 
       </UserStatus.Provider>
+      
       </main>
-
+     
+      
+      <FooterComponent/>
+     
+      
+      
+      
+      </>
   );
 }
 

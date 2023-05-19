@@ -1,8 +1,16 @@
+import { Card } from "react-bootstrap";
+import '../styles/App.css';
+
+
 export default function Home() {
 
   return(
     <section>
-      <h1>Home Landing Page</h1>
+      <Card className="home-card">
+       
+        The Mortgage Zone
+ 
+      </Card>
     </section>
   )
 }

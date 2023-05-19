@@ -9,7 +9,11 @@
   padding-top: 20px;
   border-radius: 2%;
   background-color: lightgray;
+  opacity: 0.85;
   
+}
+.card h2 {
+  font-weight: 700;
 }
 
 
@@ -20,4 +24,8 @@
   display: flex;
   margin-top: 15px;
   
+}
+
+.res-container h2{
+  font-weight: 700;
 }

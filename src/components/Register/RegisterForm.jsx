@@ -1,7 +1,7 @@
-
 import { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Card, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import "./Register.css";
 
 
 
@@ -24,17 +24,16 @@ export default function RegisterForm() {
     const _user = await resp.json();
     console.log(_user)
     if(_user.message === 'Registered'){
-      navigate('/login')
+      navigate()
     }
-   
-
-    
-
+  
     }
   
 
   return(
     <>
+    <Card className="register-card">
+      <h2>Register</h2>
       <Form onSubmit={handleRegister}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
@@ -43,9 +42,6 @@ export default function RegisterForm() {
           placeholder="Enter email" 
           value={email}
           onChange={ (e) => {setEmail(e.target.value)}}/>
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -56,13 +52,11 @@ export default function RegisterForm() {
           value={password}
           onChange={ (e) => {setPassword(e.target.value)}}/>
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
       <Button variant="primary" type="submit">
         Submit
       </Button>
     </Form>
+    </Card>
     </>
   )
 }

@@ -19,10 +19,12 @@ export default function CalculatorForm() {
     const intPayment = Number(payment);
     const intRate = Number(rate);
     const intTerm = Number(term);
-    setLoan(intPrice - intPayment);
+    console.log({ intPrice, intPayment, intRate, intTerm });
+    const _loan = intPrice - intPayment;
+    setLoan(_loan);
 
     // Mortgage Calc Formula
-    const calcPart1 = ((intRate/100)/12) * loan;
+    const calcPart1 = ((intRate/100)/12) * _loan;
     const calcPart2 = (1 - Math.pow((1 + (intRate/100)/12), -intTerm))
     setMonthlyPayment((calcPart1/calcPart2).toFixed(2));
     

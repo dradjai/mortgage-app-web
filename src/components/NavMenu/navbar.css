@@ -1,7 +1,11 @@
-
-.nav-container {
+.nav-bar {
+  background-color: whitesmoke;
+  opacity: .85;
   font-weight: 700;
-  font-size: large;
-  margin-right: 0;
 }
+
+
+
+
+
 

@@ -1,7 +1,9 @@
 import { useContext, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Card, Form } from "react-bootstrap";
 import { UserStatus } from "../../App";
 import { useNavigate } from "react-router-dom";
+import "./Login.css";
+
 
 
 export default function LoginForm() {
@@ -34,6 +36,8 @@ export default function LoginForm() {
 
   return(
     <>
+    <Card className="login-card">
+      <h2>Login</h2>
       <Form onSubmit={handleLogin}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
@@ -42,9 +46,6 @@ export default function LoginForm() {
           placeholder="Enter email" 
           value={email}
           onChange={ (e) => {setEmail(e.target.value)}}/>
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -55,13 +56,11 @@ export default function LoginForm() {
         value={password}
         onChange={ (e) => {setPassword(e.target.value)}}/>
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
       <Button variant="primary" type="submit">
         Submit
       </Button>
     </Form>
+    </Card>
     </>
   )
 }

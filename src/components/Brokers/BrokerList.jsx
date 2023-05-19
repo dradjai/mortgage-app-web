@@ -1,5 +1,6 @@
 import { useEffect, useState} from "react";
 import BrokerCard from "./BrokerCard";
+import { Col, Container, Row } from "react-bootstrap";
 
 
 export default function BrokerList() {
@@ -19,7 +20,9 @@ export default function BrokerList() {
 
   return (
     
-      <section className="broker-list">
+      <section>
+        
+
         {(!brokers)
         ? <h2>Loading...</h2>
         : brokers.map(broker => (
