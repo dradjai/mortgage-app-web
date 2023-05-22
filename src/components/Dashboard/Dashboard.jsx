@@ -46,7 +46,7 @@ const navigate = useNavigate()
               </div>
             </Col>
             
-            <Col onClick={() => navigate('/brokers')} md={4}>Calculator
+            <Col onClick={() => navigate('/calculator')} md={4}>Calculator
             <div className="profile">
               <img src={imgRoot + "HomeCalculatorNew.jpeg"} alt="profile"/>
               </div>
