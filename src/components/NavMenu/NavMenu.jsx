@@ -2,18 +2,20 @@ import { UserStatus } from "../../App";
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import { Navbar, Nav} from "react-bootstrap"
-import "./navbar.css";
+
 
 export default function NavMenu() {
   
   const navigate = useNavigate()
 
-  const { user, setUser} = useContext(UserStatus);
+  const { user, setUser } = useContext(UserStatus);
 
   const logout = () => {
     setUser();
     navigate("/")
   }
+
+  
 
   return(
     
@@ -55,7 +57,7 @@ export default function NavMenu() {
 
         
         <Nav.Item className="nav-user">
-        <Nav.Link>{user.email}</Nav.Link>
+        <Nav.Link>Welcome {user.fullName}</Nav.Link>
         </Nav.Item>
         
         <Nav.Item className="nav-logout">

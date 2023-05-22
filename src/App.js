@@ -5,15 +5,16 @@ import Calculator from './pages/Calculator';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Home from './pages/Home';
-import Footer from './components/Footer/FooterComponent';
 import Requests from './pages/Requests';
 import Brokers from './pages/Brokers';
-import './styles/App.css';
-import "bootstrap/dist/css/bootstrap.min.css";
 import FooterComponent from './components/Footer/FooterComponent';
-import { Container } from 'react-bootstrap';
+import Hero from './components/Hero/Hero';
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import './styles/App.scss';
 
 export const UserStatus = createContext(null);
+
 
 function App() {
 
@@ -21,14 +22,15 @@ const [user, setUser] = useState('');
 
 
 
+
   return (
   <>
-    <main>
       <UserStatus.Provider value={{user, setUser}}>
+     
       <BrowserRouter>
        
         <NavMenu/>
-      
+        <Hero/>
         <Routes>
        
           <Route path="/login" element={<Login />}/>
@@ -41,16 +43,8 @@ const [user, setUser] = useState('');
         </Routes>
        
       </BrowserRouter>
-
       </UserStatus.Provider>
-      
-      </main>
-     
-      
       <FooterComponent/>
-     
-      
-      
       
       </>
   );

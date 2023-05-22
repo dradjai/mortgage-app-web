@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react"
 import RequestCard from "./RequestsCard";
 import ModalComponent from "../Modal/ModalComponent";
 import { UserStatus } from "../../App";
+import { Button, Card } from "react-bootstrap";
 
 
 
@@ -25,12 +26,14 @@ const reqObj = {
 export default function RequestList() {
 
   const { user } = useContext(UserStatus);
-  const [show, setShow] = useState(false);
   const [requests, setRequests] = useState();
+  const [show, setShow] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
   const [formValues, setFormValues] = useState({reqObj});
+  
 
- 
+
+
   const handleClose = () => {
     setShow(false)
     setFormValues(reqObj)
@@ -41,7 +44,6 @@ export default function RequestList() {
 
   }
 
-
 // Listening changes to requests to render
 useEffect( () => {
   fetch(`https://mortgage-app-dsr.web.app/requests/${user._id}`)
@@ -49,6 +51,10 @@ useEffect( () => {
     .then(setRequests)
     .catch(alert)
 }, [user])
+
+
+  // const { reqLength } = requests
+  // setRequestCount(reqLength);
 
 
 // ADD Request
@@ -121,10 +127,14 @@ const handleDelete = async (item) => {
 }
 
 
-
   return(
     <>
-      
+      <Card className="add-request"> 
+      <h2>Requests</h2>
+      <Button onClick={handleShow}>
+        Add New Request
+      </Button>
+      </Card>
       {!requests
       ? <h2>Loading...</h2>
       : requests.map(request => (
@@ -135,11 +145,12 @@ const handleDelete = async (item) => {
           handleDelete={handleDelete}/>
         
       ))}
+      
       <ModalComponent 
         formValues={formValues} 
         setFormValues={setFormValues} 
         handleClose={handleClose} 
-        handleShow={handleShow} 
+        handleShow={handleShow}
         show={show} 
         isUpdate={isUpdate} 
         handleUpdate={handleUpdate}

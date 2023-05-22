@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Card, Container, Form } from "react-bootstrap";
-import "./Calculator.css"
+
 
 
 export default function CalculatorForm() {
@@ -43,7 +43,7 @@ export default function CalculatorForm() {
 
   return (
     <>
-    <Card className="card">
+    <Card className="calc-card">
       <h2>Mortgage Calculator</h2>
     <Form onSubmit={calculate}> 
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -85,7 +85,7 @@ export default function CalculatorForm() {
       </Form.Group>
 
      
-      <Button variant="primary" type="submit">Calculate </Button>&nbsp;
+      <Button type="submit">Calculate </Button>&nbsp;
       <Button onClick={reset}>Reset</Button>
       </Form>
       </Card>

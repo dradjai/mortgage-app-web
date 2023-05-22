@@ -1,8 +1,9 @@
 import { useContext, useState } from "react";
-import { Button, Card, Form } from "react-bootstrap";
+import { Button, Card, Form, Toast } from "react-bootstrap";
 import { UserStatus } from "../../App";
 import { useNavigate } from "react-router-dom";
-import "./Login.css";
+
+
 
 
 
@@ -14,6 +15,9 @@ export default function LoginForm() {
   const { setUser } = useContext(UserStatus)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('')
+  const [msgResult, setMsgResult] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -29,13 +33,38 @@ export default function LoginForm() {
     console.log(_user._id);
     if(_user._id){
       setUser(_user);
+      setShowToast(true);
+      setMsgResult('success');
+      setToastMessage('Login Success')
+      setTimeout( () => {
+        navigate("/");
+      }, 3000);
     }
-   navigate("/requests");
+    else {
+      setShowToast(true);
+      setToastMessage(_user.message);
+      setMsgResult('warning');
+    }
+   
+
 
   }
 
   return(
     <>
+
+    <Toast className="d-inLine-block m-1" bg={msgResult}
+      onClose={ () => setShowToast(false)}
+      autohide
+      show={showToast}
+      delay={2000}>
+
+      <Toast.Header>
+        <strong className="me-auto">{msgResult}</strong>
+      </Toast.Header>
+      <Toast.Body>{toastMessage}</Toast.Body>
+    </Toast>
+
     <Card className="login-card">
       <h2>Login</h2>
       <Form onSubmit={handleLogin}>

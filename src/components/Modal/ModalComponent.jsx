@@ -5,7 +5,7 @@ import { Col, Row } from 'react-bootstrap';
 
 
 
-export default function ModalComponent({ formValues, setFormValues, handleClose, handleShow, show, isUpdate, handleUpdate, handleAdd}) {
+export default function ModalComponent({ formValues, setFormValues, handleClose, show, isUpdate, handleUpdate, handleAdd}) {
 
 
 
@@ -15,11 +15,6 @@ export default function ModalComponent({ formValues, setFormValues, handleClose,
     <>
    
     
-       <div>Add New</div>
-      <Button variant="primary" onClick={handleShow}>
-        Add New Request
-      </Button>
-
       
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -163,6 +158,7 @@ export default function ModalComponent({ formValues, setFormValues, handleClose,
           
         </Modal.Footer>
       </Modal>
+
     
     </>
   )

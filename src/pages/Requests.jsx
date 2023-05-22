@@ -5,7 +5,7 @@ export default function Requests() {
   return (
     <>
       <div>
-        <RequestList />
+        <RequestList/>
       </div>
     </>
   )

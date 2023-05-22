@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Button, Card, Form } from "react-bootstrap";
+import { Button, Card, Form, Toast } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import "./Register.css";
+
 
 
 
@@ -11,6 +11,10 @@ export default function RegisterForm() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('')
+  const [msgResult, setMsgResult] = useState('');
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -19,12 +23,22 @@ export default function RegisterForm() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({email, password})
+      body: JSON.stringify({email, password, fullName})
     });
     const _user = await resp.json();
-    console.log(_user)
+    setToastMessage(_user.message);
+    
     if(_user.message === 'Registered'){
-      navigate()
+      setShowToast(true);
+      setMsgResult('Success');
+      setTimeout( () => {
+        navigate("/login")
+      }, 3000);
+      
+    }
+    else {
+      setShowToast(true);
+      setMsgResult('warning');
     }
   
     }
@@ -32,9 +46,33 @@ export default function RegisterForm() {
 
   return(
     <>
+
+
+    <Toast className="d-inLine-block m-1" bg={msgResult}
+      onClose={ () => setShowToast(false)}
+      autohide
+      show={showToast}
+      delay={2000}>
+
+      <Toast.Header>
+        <strong className="me-auto">{msgResult}</strong>
+      </Toast.Header>
+      <Toast.Body>{toastMessage}</Toast.Body>
+    </Toast>
+
     <Card className="register-card">
       <h2>Register</h2>
       <Form onSubmit={handleRegister}>
+
+      <Form.Group className="mb-3" controlId="formBasicName">
+        <Form.Label>Name</Form.Label>
+        <Form.Control 
+          type="text" 
+          placeholder="Enter name" 
+          value={fullName}
+          onChange={ (e) => {setFullName(e.target.value)}}/>
+      </Form.Group>
+
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control 
