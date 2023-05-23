@@ -11,6 +11,7 @@ import FooterComponent from './components/Footer/FooterComponent';
 import Hero from './components/Hero/Hero';
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import 'react-bootstrap-typeahead/css/Typeahead.css';
 import './styles/App.scss';
 
 export const UserStatus = createContext(null);

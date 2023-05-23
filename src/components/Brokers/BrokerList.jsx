@@ -4,6 +4,7 @@ import { Button, Container, Form, Row } from "react-bootstrap";
 
 
 
+
 export default function BrokerList() {
 
   const [brokers, setBroker] = useState();
@@ -45,26 +46,27 @@ export default function BrokerList() {
 
   return (
     <>
-    <Button variant="primary" onClick={handleSearchAll}>All Brokers</Button>
+    
     <Form onSubmit={handleSearchByCity}>
+    <Button variant="primary" onClick={handleSearchAll}>All Brokers</Button>
     <Button variant="primary" type="submit">Search City</Button>
       <Form.Group className="mb-3" controlId="formBasicCity">
         <Form.Control 
-          type="text" 
+          type="text"
           placeholder="Search City" 
           value={city}
           onChange={ (e) => {setCity(e.target.value)}}/>
       </Form.Group>
       </Form>
+      <br/>
+      <br/>
       <section>
        
       <Container id="broker-list">
-      <Row>
+      <Row className="d-flex justify-content-center g-5">
         {(!brokers)
         ? <h2>Loading...</h2>
         : 
-            
-
           brokers.map(broker => (
           <BrokerCard key={broker.id} broker={broker}/>  
         ))}
