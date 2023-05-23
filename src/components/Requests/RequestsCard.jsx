@@ -37,16 +37,16 @@ export default function RequestCard({ req, setIsUpdate, setFormValues, handleSho
          <Modal.Title>Request Details</Modal.Title>
         </Modal.Header>
       <Modal.Body className="modal-body">
-        <h3>{req.firstName} {req.lastName}</h3>
-        <p>Email: {req.email}</p>
-        <p>Phone: {req.phone}</p>
-        <p>Location: {req.location}</p>
-        <p>Proprty Type: {req.propType}</p>
-        <p>Property Value: ${req.propValue}</p>
-        <p>Down Payment: ${req.downPayment}</p>
-        <p>Credit: {req.credit}</p>
-        <p>Monthly Income: ${req.employment}</p>
-        <p>Scenario: {req.scenario}</p>
+        <h4>{req.firstName} {req.lastName}</h4>
+        <p>EMAIL: {req.email}</p>
+        <p>PHONE: {req.phone}</p>
+        <p>LOCATION: {req.location}</p>
+        <p>PROPERTY TYPE: {req.propType}</p>
+        <p>PROPERTY VALUE: ${req.propValue}</p>
+        <p>DOWN PAYMENT: ${req.downPayment}</p>
+        <p>CREDIT: {req.credit}</p>
+        <p>MONTHLY INCOME: ${req.employment}</p>
+        <p>SCENARIO: {req.scenario}</p>
 
       
       </Modal.Body>
@@ -58,7 +58,7 @@ export default function RequestCard({ req, setIsUpdate, setFormValues, handleSho
   <Col onClick={ () => openReq()}>
     <Card className="table-list">
     {/* <Button size="sm" onClick={() => openReq()}>Details</Button> */}
-      <Table size="sm" striped bordered hover>
+      <Table className="table" size="sm" striped bordered hover>
           <thead>
             <tr>
               <th>First Name</th>

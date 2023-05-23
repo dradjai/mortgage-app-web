@@ -1,6 +1,6 @@
 import { useEffect, useState} from "react";
 import BrokerCard from "./BrokerCard";
-import { Button, Container, Form, Row } from "react-bootstrap";
+import { Button, Container, Form, Row, Card } from "react-bootstrap";
 
 
 
@@ -46,7 +46,9 @@ export default function BrokerList() {
 
   return (
     <>
-    
+  
+  <Card className="card-search">
+  <h3><strong>Mortgage Brokers</strong></h3>&nbsp;
     <Form onSubmit={handleSearchByCity}>
     <Button variant="primary" onClick={handleSearchAll}>All Brokers</Button>
     <Button variant="primary" type="submit">Search City</Button>
@@ -58,6 +60,7 @@ export default function BrokerList() {
           onChange={ (e) => {setCity(e.target.value)}}/>
       </Form.Group>
       </Form>
+    </Card>
       <br/>
       <br/>
       <section>

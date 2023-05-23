@@ -3,6 +3,7 @@ import { UserStatus } from "../../App";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
+const url = "https://www.consumerfinance.gov/owning-a-home/";
 
 export default function Dashboard() {
 
@@ -54,7 +55,13 @@ const navigate = useNavigate()
 
            </Row>
           </Container>
-    
+
+        <Card className="resource-card">
+          <h3>Educational Resources</h3>
+          <a href={url}
+            target="_blank"
+            rel="noreferrer">Consumer Financial Protection Bureau</a>
+        </Card>
       
     </>
   )

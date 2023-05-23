@@ -44,7 +44,7 @@ export default function CalculatorForm() {
   return (
     <>
     <Card className="calc-card">
-      <h2>Mortgage Calculator</h2>
+      <h3><strong>Mortgage Calculator</strong></h3>&nbsp;
     <Form onSubmit={calculate}> 
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Sales Price</Form.Label>

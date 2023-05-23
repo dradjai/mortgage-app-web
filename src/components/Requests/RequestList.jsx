@@ -130,7 +130,7 @@ const handleDelete = async (item) => {
   return(
     <>
       <Card className="add-request"> 
-      <h2>Requests</h2>
+      <h3><strong>Requests</strong></h3>&nbsp;
       <Button onClick={handleShow}>
         Add New Request
       </Button>
