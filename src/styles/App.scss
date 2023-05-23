@@ -117,6 +117,14 @@ div#home {
 //   width: 30%;
 // }
 
+a:link, 
+a:visited { 
+  color: black;
+}
+.a:hover { 
+  text-decoration: none;
+}
+
 .card-search.card {
   background-color: whitesmoke;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;

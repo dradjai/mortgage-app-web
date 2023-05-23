@@ -57,7 +57,7 @@ const navigate = useNavigate()
           </Container>
 
         <Card className="resource-card">
-          <h3>Educational Resources</h3>
+          <h3>Educational Resources FAQs</h3>
           <a href={url}
             target="_blank"
             rel="noreferrer">Consumer Financial Protection Bureau</a>

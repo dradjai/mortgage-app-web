@@ -14,13 +14,14 @@ export default function BrokerCard({broker}) {
             </figure>
 
             <div className="content">
+              
               <h3>{broker.name}</h3>
               <p>{broker.email}</p>
               <p>{broker.phone}</p>
               <p>{broker.companyName}</p>
               <p>{broker.city}</p>
               <p>{broker.title}</p>
-              <p><a href={url} 
+              <p>NMLS <a href={url} 
                  target="_blank"
                  rel="noreferrer">{broker.license}</a></p>
             </div>
